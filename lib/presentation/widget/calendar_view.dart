@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_tile.dart';
 
+const List _months =
+['jan', 'feb', 'mar', 'apr', 'may','jun','jul','aug','sep','oct','nov','dec'];
+
 class CalendarView extends StatelessWidget {
-  const CalendarView({super.key});
+  final DateTime currentDate;
+
+  const CalendarView({super.key, required this.currentDate});
 
   @override
   Widget build(BuildContext context) {
+    String currentMonth =  _months[currentDate.month-1];
+    String previousMonth = currentDate.month == 0 ? _months[10] : (currentDate.month == 1 ? _months[11] : _months[currentDate.month-2]);
     return Column(
       children: [
-        const _MonthTitleRow(),
+        _MonthTitleRow(current: currentMonth, previous: previousMonth,),
         for(var item in List.generate(7, (index) => index)) const _CalendarRow()
       ],
     );
@@ -16,16 +23,18 @@ class CalendarView extends StatelessWidget {
 }
 
 class _MonthTitleRow extends StatelessWidget {
-  const _MonthTitleRow({super.key});
+  final String current;
+  final String previous;
+  const _MonthTitleRow({super.key, required this.current, required this.previous});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Янв.'),
-        Text('Фев.'),
-        Text('Мар.'),
+        const SizedBox(width: 50),
+        Text(previous),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 32), child: Text(current),),
       ],
     );
   }

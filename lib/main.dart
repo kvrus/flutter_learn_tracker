@@ -48,16 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CalendarView(),
-            TaskItem(),
-            TaskItem(),
-            TaskItem(),
-            TaskItem(),
-            TaskItem(),
+            CalendarView(currentDate: DateTime.now(),),
+            for(var item in List.generate(4, (index) => index)) const TaskItem(),
           ],
         ),
       ),

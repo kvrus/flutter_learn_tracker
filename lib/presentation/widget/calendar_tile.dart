@@ -5,6 +5,10 @@ class CalendarTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const SizedBox(
+      height: 50,
+      width: 50,
+      child: Text('1'),
+    );
   }
 }

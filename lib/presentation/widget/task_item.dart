@@ -5,6 +5,10 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const SizedBox(
+      width: double.infinity,
+      height: 70,
+      child: Placeholder(),
+    );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -74,102 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _eventIcon = Container(
-      decoration: new BoxDecoration(
-          color: Colors.green.shade50,
-          borderRadius: BorderRadius.all(Radius.circular(1000)),
-          border: Border.all(color: Colors.blue, width: 2.0)),
-    );
-    final _eventIcon2 = Container(
-      decoration: BoxDecoration(
-          color: Colors.green.shade100,
-          borderRadius: BorderRadius.all(Radius.circular(1000)),
-          border: Border.all(color: Colors.blue, width: 2.0)),
-    );
-    final _eventIcon3 = Container(
-      decoration: BoxDecoration(
-          color: Colors.green.shade200,
-          borderRadius: BorderRadius.all(Radius.circular(100)),
-          border: Border.all(color: Colors.blue, width: 2.0)),
-    );
-    final _eventIcon4 = Container(
-      decoration: BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.all(Radius.circular(1000)),
-          border: Border.all(color: Colors.blue, width: 2.0)),
-    );
 
-    EventList<Event> _markedDateMap = EventList<Event>(
-      events: {
-        new DateTime(2024, 1, 11): [
-          new Event(
-            date: new DateTime(2024, 1, 11),
-            title: 'Event 1',
-            icon: _eventIcon,
-          ),
-        ],
-        new DateTime(2024, 1, 12): [
-          new Event(
-            date: new DateTime(2024, 1, 11),
-            title: 'Event 1',
-            icon: _eventIcon2,
-          ),
-        ],
-        new DateTime(2024, 1, 13): [
-          new Event(
-            date: new DateTime(2024, 1, 11),
-            title: 'Event 1',
-            icon: _eventIcon3,
-          ),
-        ],
-        new DateTime(2024, 1, 14): [
-          new Event(
-            date: new DateTime(2024, 1, 11),
-            title: 'Event 1',
-            icon: _eventIcon4,
-          ),
-        ],
-        new DateTime(2024, 1, 6): [
-          new Event(
-            date: new DateTime(2024, 1, 11),
-            title: 'Event 1',
-            icon: _eventIcon2,
-          ),
-        ],
-      },
-    );
-
-    final _calendarCarousel = CalendarCarousel<Event>(
-      dayPadding: 0,
-      weekendTextStyle: TextStyle(
-        color: Colors.blue,
-      ),
-      thisMonthDayBorderColor: Colors.grey,
-//          weekDays: null, /// for pass null when you do not want to render weekDays
-      headerText: 'Flutter Progress',
-      weekFormat: false,
-      markedDatesMap: _markedDateMap,
-      height: 500.0,
-      selectedDateTime: DateTime.now(),
-      showIconBehindDayText: true,
-      customGridViewPhysics: NeverScrollableScrollPhysics(),
-      markedDateShowIcon: true,
-      markedDateIconMaxShown: 4,
-      selectedDayTextStyle: TextStyle(
-        color: Colors.white,
-      ),
-      todayTextStyle: TextStyle(
-        color: Colors.blue,
-      ),
-      markedDateIconBuilder: (event) {
-        return event.icon ?? Icon(Icons.help_outline);
-      },
-      minSelectedDate: _currentDate.subtract(Duration(days: 360)),
-      maxSelectedDate: _currentDate.add(Duration(days: 360)),
-      todayButtonColor: Colors.transparent,
-      todayBorderColor: Colors.green,
-      markedDateMoreShowTotal: false,
-    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -179,10 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: _calendarCarousel,
-            ),
             const Text(
               'You have pushed the button this many times:',
             ),

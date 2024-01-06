@@ -1,19 +1,26 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/data/task_repository.dart';
+import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
 import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 Box<TaskData>? taskBox;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var path = Directory.current.path;
-  Hive.init(path);
+  if(!kIsWeb){
+    final documentsDirectory = await getApplicationDocumentsDirectory();
+    Hive.init(documentsDirectory.path);
+  } else {
+    Hive.initFlutter();
+  }
   Hive.registerAdapter(TaskDataAdapter());
   taskBox = await Hive.openBox('task_box');
   runApp(const MyApp());
@@ -55,12 +62,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  List<DayProgress> tasks = [];
+  @override
+  void initState() {
+    tasks = Provider.of<TaskRepository>(context, listen: false).getAll();
+    super.initState();
   }
 
   @override
@@ -77,13 +83,18 @@ class _MyHomePageState extends State<MyHomePage> {
             CalendarView(
               currentDate: DateTime.now(),
             ),
-            for (var item in List.generate(4, (index) => index))
+            for (var item in tasks)
               const TaskItem(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Provider.of<TaskRepository>(context, listen: false).save(DayProgress(DateTime.now(), 12));
+          setState(() {
+            tasks = Provider.of<TaskRepository>(context, listen: false).getAll();
+          });
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

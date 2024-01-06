@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_tracker/app_colors.dart';
 import 'package:flutter_learn_tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/data/task_repository.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         title: 'Learn Tracker',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          scaffoldBackgroundColor: AppColors.darkGrey,
           useMaterial3: true,
         ),
         home: const MyHomePage(title: 'Learn Tracker'),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/domain/extensions/calendar_ext.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
@@ -30,8 +32,8 @@ class _MonthTitleRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SizedBox(width: 50),
-        Text(previous),
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 32), child: Text(current),),
+        Text(previous, style: const TextStyle(color: Colors.white),),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 32), child: Text(current, style: const TextStyle(color: Colors.white),),),
       ],
     );
   }
@@ -45,15 +47,19 @@ class _CalendarRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          width: 100,
-          child: Text(getDayOfWeekString(dayOfWeek)),
-        ),
-        for(var item in List.generate(8, (index) => index)) CalendarTile(date: calendarRow[7-item].day, completePercent: 0.9,)
-      ],
+    Random random = Random();
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(getDayOfWeekString(dayOfWeek), style: const TextStyle(color: Colors.white),),
+          ),
+          for(var item in List.generate(8, (index) => index)) CalendarTile(date: calendarRow[7-item].day, completePercent: random.nextInt(100),)
+        ],
+      ),
     );
   }
 }

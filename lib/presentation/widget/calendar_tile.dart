@@ -3,7 +3,7 @@ import 'package:flutter_learn_tracker/app_colors.dart';
 
 class CalendarTile extends StatelessWidget {
   final int date;
-  final double completePercent;
+  final int completePercent;
 
   const CalendarTile({
     super.key,
@@ -16,13 +16,13 @@ class CalendarTile extends StatelessWidget {
     Color color;
     if (completePercent == 0) {
       color = AppColors.grey;
-    } else if (completePercent < 0.25) {
+    } else if (completePercent < 25) {
       color = AppColors.green20;
-    } else if (completePercent < 0.5) {
+    } else if (completePercent < 50) {
       color = AppColors.green40;
-    } else if (completePercent < 0.75) {
+    } else if (completePercent < 75) {
       color = AppColors.green60;
-    } else if (completePercent < 1) {
+    } else if (completePercent < 100) {
       color = AppColors.green80;
     } else {
       color = AppColors.green100;
@@ -35,7 +35,7 @@ class CalendarTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
-        child: Text('$date', style: TextStyle(color: Colors.white),),
+        child: Text('$date', style: const TextStyle(color: Colors.white),),
       ),
     );
   }

@@ -51,7 +51,7 @@ class _CalendarRow extends StatelessWidget {
           width: 100,
           child: Text(dayOfWeek),
         ),
-        for(var item in List.generate(8, (index) => index)) const CalendarTile()
+        for(var item in List.generate(8, (index) => index)) const CalendarTile(date: 1, completePercent: 0.9,)
       ],
     );
   }

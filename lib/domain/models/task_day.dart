@@ -1,6 +1,17 @@
 class TaskDay {
-  final DateTime time;
-  final int checkedTasks;
-  final int amountOfTasks;
-  TaskDay(this.time, this.checkedTasks, this.amountOfTasks);
+  final DateTime date;
+  List<Task> tasks;
+  TaskDay(this.date, this.tasks);
+}
+
+class Task {
+  final String name;
+  final bool completed;
+  Task(this.name, this.completed);
+}
+
+class DayProgress {
+  final DateTime date;
+  final int completePercent;
+  DayProgress(this.date, this.completePercent);
 }

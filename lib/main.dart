@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_carousel/classes/event.dart';
 
 void main() {
   runApp(const MyApp());

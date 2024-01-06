@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_tracker/domain/extensions/calendar_ext.dart';
+import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_tile.dart';
-
-const List _months =
-['jan', 'feb', 'mar', 'apr', 'may','jun','jul','aug','sep','oct','nov','dec'];
 
 class CalendarView extends StatelessWidget {
   final DateTime currentDate;
@@ -11,12 +10,10 @@ class CalendarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String currentMonth =  _months[currentDate.month-1];
-    String previousMonth = currentDate.month == 0 ? _months[10] : (currentDate.month == 1 ? _months[11] : _months[currentDate.month-2]);
     return Column(
       children: [
-        _MonthTitleRow(current: currentMonth, previous: previousMonth,),
-        for(var item in List.generate(7, (index) => index)) const _CalendarRow()
+        _MonthTitleRow(current: currentDate.getCurrentMonth(), previous: currentDate.getPreviousMonth(),),
+        for(var item in List.generate(7, (index) => index)) const _CalendarRow(dayOfWeek: 'Пон.', daysInRow: [],)
       ],
     );
   }
@@ -41,16 +38,18 @@ class _MonthTitleRow extends StatelessWidget {
 }
 
 class _CalendarRow extends StatelessWidget {
-  const _CalendarRow({super.key});
+  final String dayOfWeek;
+  final List<TaskDay> daysInRow;
+  const _CalendarRow({super.key, required this.dayOfWeek, required this.daysInRow});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(
+        SizedBox(
           width: 100,
-          child: Text('Пон.'),
+          child: Text(dayOfWeek),
         ),
         for(var item in List.generate(8, (index) => index)) const CalendarTile()
       ],

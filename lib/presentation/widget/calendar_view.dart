@@ -13,7 +13,7 @@ class CalendarView extends StatelessWidget {
     return Column(
       children: [
         _MonthTitleRow(current: currentDate.getCurrentMonth(), previous: currentDate.getPreviousMonth(),),
-        for(var item in List.generate(7, (index) => index)) const _CalendarRow(dayOfWeek: 'Пон.', daysInRow: [],)
+        for(var item in List.generate(7, (index) => index)) _CalendarRow(dayOfWeek: item, daysInRow: const [], calendarRow: currentDate.getCalendarRow(item),)
       ],
     );
   }
@@ -38,9 +38,10 @@ class _MonthTitleRow extends StatelessWidget {
 }
 
 class _CalendarRow extends StatelessWidget {
-  final String dayOfWeek;
+  final int dayOfWeek;
   final List<TaskDay> daysInRow;
-  const _CalendarRow({super.key, required this.dayOfWeek, required this.daysInRow});
+  final List<DateTime> calendarRow;
+  const _CalendarRow({super.key, required this.dayOfWeek, required this.daysInRow, required this.calendarRow});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class _CalendarRow extends StatelessWidget {
       children: [
         SizedBox(
           width: 100,
-          child: Text(dayOfWeek),
+          child: Text(getDayOfWeekString(dayOfWeek)),
         ),
         for(var item in List.generate(8, (index) => index)) const CalendarTile()
       ],

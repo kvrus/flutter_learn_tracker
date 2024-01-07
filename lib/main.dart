@@ -1,9 +1,30 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/presentation/theme/theme.dart';
+import 'package:flutter_learn_tracker/app_colors.dart';
+import 'package:flutter_learn_tracker/data/models/task_data.dart';
+import 'package:flutter_learn_tracker/data/task_repository.dart';
+import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
 import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Box<TaskData>? taskBox;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if(!kIsWeb){
+    final documentsDirectory = await getApplicationDocumentsDirectory();
+    Hive.init(documentsDirectory.path);
+  } else {
+    Hive.initFlutter();
+  }
+  Hive.registerAdapter(TaskDataAdapter());
+  taskBox = await Hive.openBox('task_box');
   runApp(const MyApp());
 }
 
@@ -13,11 +34,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Learn Tracker',
-      debugShowCheckedModeBanner: false,
-      theme: theme(),
-      home: const MyHomePage(title: 'Learn Tracker'),
+    return MultiProvider(
+      providers: [
+        Provider<Box<TaskData>>.value(
+          value: taskBox!,
+        ),
+        Provider<TaskRepository>(
+            create: (ctx) => TaskRepository(Provider.of<Box<TaskData>>(ctx, listen: false),),)
+      ],
+      child: MaterialApp(
+        title: 'Learn Tracker',
+        debugShowCheckedModeBanner: false,
+        theme: theme(),
+        home: const MyHomePage(title: 'Learn Tracker'),
+      ),
     );
   }
 }
@@ -32,16 +62,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  List<DayProgress> tasks = [];
+  @override
+  void initState() {
+    tasks = Provider.of<TaskRepository>(context, listen: false).getAll();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -56,13 +85,19 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 8.0),
               CalendarView(currentDate: DateTime.now(),),
               const SizedBox(height: 8.0),
-              for(var item in List.generate(4, (index) => index)) const TaskItem(initialCompleted: false,),
+              for (var item in tasks)
+                const TaskItem(),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Provider.of<TaskRepository>(context, listen: false).save(DayProgress(DateTime.now(), 12));
+          setState(() {
+            tasks = Provider.of<TaskRepository>(context, listen: false).getAll();
+          });
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

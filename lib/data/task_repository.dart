@@ -9,9 +9,7 @@ class TaskRepository implements ITaskRepository {
   TaskRepository(this.box);
 
   @override
-  void delete(Task progress) {
-    // TODO: implement delete
-  }
+  Future<void> delete(Task task) => box.delete(task.name);
 
   @override
   List<Task> getAll() {

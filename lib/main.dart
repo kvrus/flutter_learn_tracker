@@ -121,10 +121,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     Provider.of<TaskRepository>(context, listen: false)
                         .save(Task(name, toggled));
                     Provider.of<ProgressRepository>(context, listen: false)
-                        .save(DayProgress(DateTime.now(), checkedCount, allCount));
+                        .save(DayProgress(
+                            DateTime.now(), checkedCount, allCount));
                     _progressChangeNotifier.update(
-                        Provider.of<ProgressRepository>(context, listen: false).getAll());
-                  }, onDismissed: (String name) {  },
+                        Provider.of<ProgressRepository>(context, listen: false)
+                            .getAll());
+                  },
+                  onDismissed: (String name) async {
+                    final taskRepo = Provider.of<TaskRepository>(context, listen: false);
+                    final progressRepo = Provider.of<ProgressRepository>(context, listen: false);
+                    await taskRepo.delete(Task(name, false));
+                    final tasks = taskRepo.getAll();
+                    progressRepo.save(DayProgress(
+                            DateTime.now(),
+                            tasks.where((e) => e.completed).length,
+                            tasks.length));
+                    _progressChangeNotifier.update(
+                        progressRepo.getAll());
+                    _taskChangeNotifier.update(taskRepo.getAll());
+                  },
                 ),
               ),
             ],
@@ -169,10 +184,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       Provider.of<TaskRepository>(context, listen: false)
                           .getAll());
                   final tasks = _taskChangeNotifier.task;
-                  Provider.of<ProgressRepository>(context, listen: false)
-                      .save(DayProgress(DateTime.now(), tasks.where((e) => e.completed).length, tasks.length));
+                  Provider.of<ProgressRepository>(context, listen: false).save(
+                      DayProgress(
+                          DateTime.now(),
+                          tasks.where((e) => e.completed).length,
+                          tasks.length));
                   _progressChangeNotifier.update(
-                      Provider.of<ProgressRepository>(context, listen: false).getAll());
+                      Provider.of<ProgressRepository>(context, listen: false)
+                          .getAll());
                   _controller.clear();
                   Navigator.of(context).pop();
                 }

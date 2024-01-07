@@ -6,20 +6,17 @@ part 'task_data.g.dart';
 class TaskData {
 
   @HiveField(0)
-  DateTime date;
+  String name;
 
   @HiveField(1)
-  int completedTasks;
+  bool checked;
 
-  @HiveField(2)
-  int allTasks;
+  TaskData({required this.name, required this.checked});
 
-  TaskData({required this.date, required this.completedTasks, required this.allTasks});
-
-  DayProgress toDomain() => DayProgress(date, 1);
+  Task toDomain() => Task(name, checked);
 }
 
-extension DayProgressX on DayProgress {
-  TaskData fromDomain() => TaskData(date: date, completedTasks: 1, allTasks: 2, );
+extension TaskX on Task {
+  TaskData fromDomain() => TaskData(name: name, checked: completed);
 }
 

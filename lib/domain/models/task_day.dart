@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class TaskDay {
   final DateTime date;
   List<Task> tasks;
@@ -12,6 +14,10 @@ class Task {
 
 class DayProgress {
   final DateTime date;
-  final int completePercent;
-  DayProgress(this.date, this.completePercent);
+  final int completeTasks;
+  final int allTasks;
+  DayProgress(this.date, this.completeTasks, this.allTasks);
+
+  String get dateString => DateFormat('yyyy-MM-dd').format(date);
+
 }

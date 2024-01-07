@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/theme/app_colors.dart';
 
 class TaskItem extends StatefulWidget {
-  final bool initialCompleted;
+  final Task task;
+  final void Function(bool checked) onToggled;
 
-  const TaskItem({super.key, required this.initialCompleted});
+  const TaskItem({super.key, required this.task, required this.onToggled});
 
   @override
   State<TaskItem> createState() => _TaskItemState();
@@ -15,7 +17,7 @@ class _TaskItemState extends State<TaskItem> {
 
   @override
   void initState() {
-    value = widget.initialCompleted;
+    value = widget.task.completed;
     super.initState();
   }
 
@@ -28,9 +30,10 @@ class _TaskItemState extends State<TaskItem> {
         controlAffinity: ListTileControlAffinity.leading,
         contentPadding: const EdgeInsets.all(8.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        title: const Text('My task'),
+        title: Text(widget.task.name),
         tileColor: value ? AppColors.green20 : AppColors.grey,
         onChanged: (bool? val) {
+          widget.onToggled(val == true);
           setState(() {
             value = val == true;
           });

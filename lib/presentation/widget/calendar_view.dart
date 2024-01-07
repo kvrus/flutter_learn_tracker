@@ -6,11 +6,12 @@ import 'package:flutter_learn_tracker/presentation/widget/calendar_tile.dart';
 
 class CalendarView extends StatelessWidget {
   final DateTime currentDate;
-
-  const CalendarView({super.key, required this.currentDate});
+  final List<DayProgress> progress;
+  const CalendarView({super.key, required this.currentDate, required this.progress});
 
   @override
   Widget build(BuildContext context) {
+    print('CalendarView redraw');
     return Column(
       children: [
         _MonthTitleRow(
@@ -22,8 +23,8 @@ class CalendarView extends StatelessWidget {
         for (var item in List.generate(7, (index) => index))
           _CalendarRow(
             dayOfWeek: item,
-            daysInRow: const [],
             calendarRow: currentDate.getCalendarRow(item),
+            dayProgress: progress,
           )
       ],
     );
@@ -66,13 +67,13 @@ class _MonthTitleRow extends StatelessWidget {
 
 class _CalendarRow extends StatelessWidget {
   final int dayOfWeek;
-  final List<TaskDay> daysInRow;
+  final List<DayProgress> dayProgress;
   final List<DateTime> calendarRow;
 
   const _CalendarRow(
       {super.key,
       required this.dayOfWeek,
-      required this.daysInRow,
+      required this.dayProgress,
       required this.calendarRow});
 
   @override

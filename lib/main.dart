@@ -1,27 +1,35 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_tracker/data/models/progress_data.dart';
+import 'package:flutter_learn_tracker/data/notifiers/progress_change_notifier.dart';
+import 'package:flutter_learn_tracker/data/notifiers/tack_change_notifier.dart';
+import 'package:flutter_learn_tracker/data/progress_repository.dart';
 import 'package:flutter_learn_tracker/presentation/theme/theme.dart';
 import 'package:flutter_learn_tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/data/task_repository.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
 import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
+import 'package:flutter_learn_tracker/presentation/widget/tasks_list_view.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 Box<TaskData>? taskBox;
+Box<DayProgressData>? progressBox;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if(!kIsWeb){
+  if (!kIsWeb) {
     final documentsDirectory = await getApplicationDocumentsDirectory();
     Hive.init(documentsDirectory.path);
   } else {
     Hive.initFlutter();
   }
   Hive.registerAdapter(TaskDataAdapter());
+  Hive.registerAdapter(DayProgressDataAdapter());
   taskBox = await Hive.openBox('task_box');
+  progressBox = await Hive.openBox('progress_box');
   runApp(const MyApp());
 }
 
@@ -36,8 +44,19 @@ class MyApp extends StatelessWidget {
         Provider<Box<TaskData>>.value(
           value: taskBox!,
         ),
+        Provider<Box<DayProgressData>>.value(
+          value: progressBox!,
+        ),
         Provider<TaskRepository>(
-            create: (ctx) => TaskRepository(Provider.of<Box<TaskData>>(ctx, listen: false),),)
+          create: (ctx) => TaskRepository(
+            Provider.of<Box<TaskData>>(ctx, listen: false),
+          ),
+        ),
+        Provider<ProgressRepository>(
+          create: (ctx) => ProgressRepository(
+            Provider.of<Box<DayProgressData>>(ctx, listen: false),
+          ),
+        )
       ],
       child: MaterialApp(
         title: 'Learn Tracker',
@@ -59,10 +78,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<DayProgress> tasks = [];
+  final _taskChangeNotifier = TaskChangeNotifier();
+  final _progressChangeNotifier = ProgressChangeNotifier();
+
   @override
   void initState() {
-    tasks = Provider.of<TaskRepository>(context, listen: false).getAll();
+    _taskChangeNotifier
+        .update(Provider.of<TaskRepository>(context, listen: false).getAll());
+    _progressChangeNotifier.update(
+        Provider.of<ProgressRepository>(context, listen: false).getAll());
     super.initState();
   }
 
@@ -79,20 +103,38 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 8.0),
-              CalendarView(currentDate: DateTime.now(),),
+              ListenableBuilder(
+                listenable: _progressChangeNotifier,
+                builder: (context, child) => CalendarView(
+                  currentDate: DateTime.now(),
+                  progress: _progressChangeNotifier.progress,
+                ),
+              ),
               const SizedBox(height: 8.0),
-              for (var item in tasks)
-                const TaskItem(initialCompleted: false,),
+              ListenableBuilder(
+                listenable: _taskChangeNotifier,
+                builder: (context, child) => TasksListView(
+                  tasks: _taskChangeNotifier.task,
+                  onChanged: (name, toggled, checkedCount, allCount) {
+                    Provider.of<TaskRepository>(context, listen: false)
+                        .save(Task(name, toggled));
+                    Provider.of<ProgressRepository>(context, listen: false)
+                        .save(DayProgress(DateTime.now(), checkedCount, allCount));
+                    _progressChangeNotifier.update(
+                        Provider.of<ProgressRepository>(context, listen: false).getAll());
+                  },
+                ),
+              ),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<TaskRepository>(context, listen: false).save(DayProgress(DateTime.now(), 12));
-          setState(() {
-            tasks = Provider.of<TaskRepository>(context, listen: false).getAll();
-          });
+          Provider.of<TaskRepository>(context, listen: false)
+              .save(Task('New task', false));
+          _taskChangeNotifier.update(
+              Provider.of<TaskRepository>(context, listen: false).getAll());
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

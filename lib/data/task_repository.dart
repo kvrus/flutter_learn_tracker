@@ -9,17 +9,23 @@ class TaskRepository implements ITaskRepository {
   TaskRepository(this.box);
 
   @override
-  void delete(DayProgress progress) {
+  void delete(Task progress) {
     // TODO: implement delete
   }
 
   @override
-  List<DayProgress> getAll() {
+  List<Task> getAll() {
     return box.values.toList().toList().map((item) => item.toDomain()).toList();
   }
 
   @override
-  void save(DayProgress progress) {
-    box.add(progress.fromDomain());
+  void save(Task task) {
+    box.put(task.name, task.fromDomain());
   }
+
+  @override
+  Task? get(Task task) {
+    return box.get(task.name)?.toDomain();
+  }
+
 }

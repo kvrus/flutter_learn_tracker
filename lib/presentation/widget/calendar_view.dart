@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/domain/extensions/calendar_ext.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
@@ -31,40 +30,6 @@ class CalendarView extends StatelessWidget {
   }
 }
 
-class _MonthTitleRow extends StatelessWidget {
-  final String current;
-  final String previous;
-  final int currInColumn;
-  final int prevInColumn;
-
-  const _MonthTitleRow(
-      {super.key, required this.current, required this.previous, required this.currInColumn, required this.prevInColumn});
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: calculate column for first day in previous and current months
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(width: 36),
-        for (var item in List.generate(columnsCount, (index) => index))
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Container(
-              width: 36,
-              alignment: Alignment.center,
-              child: item == prevInColumn
-                  ? Text(previous)
-                  : item == currInColumn
-                      ? Text(current)
-                      : Container(),
-            ),
-          ),
-      ],
-    );
-  }
-}
-
 class _CalendarRow extends StatelessWidget {
   final int dayOfWeek;
   final List<DayProgress> dayProgress;
@@ -78,7 +43,6 @@ class _CalendarRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Random random = Random();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -93,11 +57,53 @@ class _CalendarRow extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: CalendarTile(
                 date: calendarRow[7 - item].day,
-                completePercent: random.nextInt(100),
+                completePercent: _findDayProgress(calendarRow[7 - item], dayProgress),
               ),
             )
         ],
       ),
+    );
+  }
+
+  int _findDayProgress(DateTime date, List<DayProgress> dayProgress) {
+    final result = dayProgress.where((e) => e.date.format() == date.format());
+    if(result.isNotEmpty) {
+      return ((result.first.completeTasks/result.first.allTasks)*100).ceil();
+    } else {
+      return 0;
+    }
+  }
+}
+
+class _MonthTitleRow extends StatelessWidget {
+  final String current;
+  final String previous;
+  final int currInColumn;
+  final int prevInColumn;
+
+  const _MonthTitleRow(
+      {super.key, required this.current, required this.previous, required this.currInColumn, required this.prevInColumn});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(width: 36),
+        for (var item in List.generate(columnsCount, (index) => index))
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Container(
+              width: 36,
+              alignment: Alignment.center,
+              child: item == prevInColumn
+                  ? Text(previous)
+                  : item == currInColumn
+                  ? Text(current)
+                  : Container(),
+            ),
+          ),
+      ],
     );
   }
 }

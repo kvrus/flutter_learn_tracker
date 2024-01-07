@@ -1,4 +1,4 @@
-import 'package:intl/intl.dart';
+import 'package:flutter_learn_tracker/domain/extensions/calendar_ext.dart';
 
 class TaskDay {
   final DateTime date;
@@ -18,6 +18,6 @@ class DayProgress {
   final int allTasks;
   DayProgress(this.date, this.completeTasks, this.allTasks);
 
-  String get dateString => DateFormat('yyyy-MM-dd').format(date);
+  String get dateString => date.format();
 
 }

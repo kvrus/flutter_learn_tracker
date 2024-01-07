@@ -166,6 +166,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     .save(Task(controller.text, false));
                 _taskChangeNotifier.update(
                     Provider.of<TaskRepository>(context, listen: false).getAll());
+                final tasks = _taskChangeNotifier.task;
+                Provider.of<ProgressRepository>(context, listen: false)
+                    .save(DayProgress(DateTime.now(), tasks.where((e) => e.completed).length, tasks.length));
+                _progressChangeNotifier.update(
+                    Provider.of<ProgressRepository>(context, listen: false).getAll());
                 Navigator.of(context).pop();
               },
             ),

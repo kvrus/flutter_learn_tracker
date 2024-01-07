@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 const List _months =
 ['jan', 'feb', 'mar', 'apr', 'may','jun','jul','aug','sep','oct','nov','dec'];
 const List _dayOfWeek =
@@ -5,6 +7,7 @@ const List _dayOfWeek =
 const int columnsCount = 8;
 
 extension DateTimeX on DateTime {
+  String format() => DateFormat('yyyy-MM-dd').format(this);
   String getCurrentMonth() =>  _months[month-1];
   String getPreviousMonth() => month == 0 ? _months[10] : (month == 1 ? _months[11] : _months[month-2]);
   List<DateTime> getCalendarRow(int dayOfWeek)  {

@@ -10,7 +10,6 @@ import 'package:flutter_learn_tracker/data/task_repository.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
 import 'package:flutter_learn_tracker/presentation/widget/input_form_field.dart';
-import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
 import 'package:flutter_learn_tracker/presentation/widget/tasks_list_view.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
@@ -125,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         .save(DayProgress(DateTime.now(), checkedCount, allCount));
                     _progressChangeNotifier.update(
                         Provider.of<ProgressRepository>(context, listen: false).getAll());
-                  },
+                  }, onDismissed: (String name) {  },
                 ),
               ),
             ],
@@ -174,6 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       .save(DayProgress(DateTime.now(), tasks.where((e) => e.completed).length, tasks.length));
                   _progressChangeNotifier.update(
                       Provider.of<ProgressRepository>(context, listen: false).getAll());
+                  _controller.clear();
                   Navigator.of(context).pop();
                 }
               },

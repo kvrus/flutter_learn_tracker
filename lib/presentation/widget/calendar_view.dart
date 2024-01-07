@@ -57,6 +57,7 @@ class _CalendarRow extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: CalendarTile(
                 date: calendarRow[7 - item].day,
+                show: calendarRow[7 - item].isBefore(DateTime.now()),
                 completePercent: _findDayProgress(calendarRow[7 - item], dayProgress),
               ),
             )

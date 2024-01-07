@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/app_colors.dart';
+import 'package:flutter_learn_tracker/presentation/theme/app_colors.dart';
 
 class CalendarTile extends StatelessWidget {
   final int date;
@@ -35,7 +35,7 @@ class CalendarTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
-        child: Text('$date', style: const TextStyle(color: Colors.white),),
+        child: Text('$date'),
       ),
     );
   }

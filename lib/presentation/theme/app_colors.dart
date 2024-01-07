@@ -8,4 +8,5 @@ class AppColors {
   static const green60 = Color(0x7734AE3B);
   static const green40 = Color(0x5534AE3B);
   static const green20 = Color(0x2234AE3B);
+  static const white = Color(0xAAFFFFFF);
 }

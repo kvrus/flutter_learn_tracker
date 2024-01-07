@@ -32,8 +32,8 @@ class _MonthTitleRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const SizedBox(width: 50),
-        Text(previous, style: const TextStyle(color: Colors.white),),
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 32), child: Text(current, style: const TextStyle(color: Colors.white),),),
+        Text(previous),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 32), child: Text(current),),
       ],
     );
   }
@@ -55,7 +55,7 @@ class _CalendarRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 100,
-            child: Text(getDayOfWeekString(dayOfWeek), style: const TextStyle(color: Colors.white),),
+            child: Text(getDayOfWeekString(dayOfWeek)),
           ),
           for(var item in List.generate(8, (index) => index)) CalendarTile(date: calendarRow[7-item].day, completePercent: random.nextInt(100),)
         ],

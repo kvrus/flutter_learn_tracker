@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/app_colors.dart';
+import 'package:flutter_learn_tracker/presentation/theme/theme.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
 import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
 
@@ -15,11 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Learn Tracker',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-        scaffoldBackgroundColor: AppColors.darkGrey,
-        useMaterial3: true,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: theme(),
       home: const MyHomePage(title: 'Learn Tracker'),
     );
   }
@@ -51,12 +48,17 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CalendarView(currentDate: DateTime.now(),),
-            for(var item in List.generate(4, (index) => index)) const TaskItem(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 8.0),
+              CalendarView(currentDate: DateTime.now(),),
+              const SizedBox(height: 8.0),
+              for(var item in List.generate(4, (index) => index)) const TaskItem(initialCompleted: false,),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

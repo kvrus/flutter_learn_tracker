@@ -81,6 +81,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _taskChangeNotifier = TaskChangeNotifier();
   final _progressChangeNotifier = ProgressChangeNotifier();
+  final _formKey = GlobalKey<FormState>();
+  final _controller = TextEditingController();
 
   @override
   void initState() {
@@ -139,13 +141,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _dialogBuilder(BuildContext context) {
-    final controller = TextEditingController();
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Create new task'),
-          content: InputFormField(controller: controller),
+          content: InputFormField(formKey: _formKey, controller: _controller),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
@@ -162,16 +163,19 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text('Add'),
               onPressed: () {
-                Provider.of<TaskRepository>(context, listen: false)
-                    .save(Task(controller.text, false));
-                _taskChangeNotifier.update(
-                    Provider.of<TaskRepository>(context, listen: false).getAll());
-                final tasks = _taskChangeNotifier.task;
-                Provider.of<ProgressRepository>(context, listen: false)
-                    .save(DayProgress(DateTime.now(), tasks.where((e) => e.completed).length, tasks.length));
-                _progressChangeNotifier.update(
-                    Provider.of<ProgressRepository>(context, listen: false).getAll());
-                Navigator.of(context).pop();
+                if (_formKey.currentState!.validate()) {
+                  Provider.of<TaskRepository>(context, listen: false)
+                      .save(Task(_controller.text, false));
+                  _taskChangeNotifier.update(
+                      Provider.of<TaskRepository>(context, listen: false)
+                          .getAll());
+                  final tasks = _taskChangeNotifier.task;
+                  Provider.of<ProgressRepository>(context, listen: false)
+                      .save(DayProgress(DateTime.now(), tasks.where((e) => e.completed).length, tasks.length));
+                  _progressChangeNotifier.update(
+                      Provider.of<ProgressRepository>(context, listen: false).getAll());
+                  Navigator.of(context).pop();
+                }
               },
             ),
           ],

@@ -16,6 +16,8 @@ class CalendarView extends StatelessWidget {
         _MonthTitleRow(
           current: currentDate.getCurrentMonth(),
           previous: currentDate.getPreviousMonth(),
+          currInColumn: currentDate.getColumnForCurrent(),
+          prevInColumn: currentDate.getColumnForPrevious(),
         ),
         for (var item in List.generate(7, (index) => index))
           _CalendarRow(
@@ -31,28 +33,28 @@ class CalendarView extends StatelessWidget {
 class _MonthTitleRow extends StatelessWidget {
   final String current;
   final String previous;
+  final int currInColumn;
+  final int prevInColumn;
 
   const _MonthTitleRow(
-      {super.key, required this.current, required this.previous});
+      {super.key, required this.current, required this.previous, required this.currInColumn, required this.prevInColumn});
 
   @override
   Widget build(BuildContext context) {
-    //todo calculate column for previous and current months
-    var prevIn = 2;
-    var currIn = 7;
+    // TODO: calculate column for first day in previous and current months
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(width: 36),
-        for (var item in List.generate(8, (index) => index))
+        for (var item in List.generate(columnsCount, (index) => index))
           Padding(
             padding: const EdgeInsets.only(left: 8),
             child: Container(
               width: 36,
               alignment: Alignment.center,
-              child: item == prevIn
+              child: item == prevInColumn
                   ? Text(previous)
-                  : item == currIn
+                  : item == currInColumn
                       ? Text(current)
                       : Container(),
             ),

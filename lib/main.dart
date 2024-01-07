@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         .save(DayProgress(DateTime.now(), checkedCount, allCount));
                     _progressChangeNotifier.update(
                         Provider.of<ProgressRepository>(context, listen: false).getAll());
-                  },
+                  }, onDismissed: (String name) {  },
                 ),
               ),
             ],
@@ -169,6 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   _taskChangeNotifier.update(
                       Provider.of<TaskRepository>(context, listen: false)
                           .getAll());
+                  _controller.clear();
                   Navigator.of(context).pop();
                 }
               },

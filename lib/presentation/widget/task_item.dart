@@ -29,7 +29,7 @@ class _TaskItemState extends State<TaskItem> {
         contentPadding: const EdgeInsets.all(8.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         title: const Text('My task'),
-        tileColor: value ? AppColors.green80 : AppColors.grey,
+        tileColor: value ? AppColors.green20 : AppColors.grey,
         onChanged: (bool? val) {
           setState(() {
             value = val == true;

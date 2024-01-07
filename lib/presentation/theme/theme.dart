@@ -4,9 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData theme() {
   return ThemeData(
+    useMaterial3: true,
     colorScheme: colorScheme(),
-    //scaffoldBackgroundColor: AppColors.darkGrey,
-    //appBarTheme: appBarTheme(),
     textTheme: textTheme(),
   );
 }
@@ -18,21 +17,12 @@ ColorScheme colorScheme() {
     onPrimary: AppColors.white,
     secondary: AppColors.darkGrey, // tonal buttons
     onSecondary: AppColors.white,
-    error: Colors.redAccent,
-    onError: Colors.white,
+    error: AppColors.red,
+    onError: AppColors.white,
     background: AppColors.darkGrey, // scaffold
     onBackground: AppColors.white, // outlined buttons
-    surface: Colors.red, // app bar
+    surface: AppColors.grey, // app bar
     onSurface: AppColors.white, // texts, input texts, icons
-  );
-}
-
-AppBarTheme appBarTheme() {
-  return const AppBarTheme(
-    backgroundColor: Colors.white,
-    surfaceTintColor: Colors.white,
-    elevation: 4,
-    shadowColor: AppColors.grey,
   );
 }
 

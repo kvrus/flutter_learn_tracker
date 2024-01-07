@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/presentation/theme/theme.dart';
-import 'package:flutter_learn_tracker/app_colors.dart';
 import 'package:flutter_learn_tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/data/task_repository.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
@@ -73,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
@@ -86,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               CalendarView(currentDate: DateTime.now(),),
               const SizedBox(height: 8.0),
               for (var item in tasks)
-                const TaskItem(),
+                const TaskItem(initialCompleted: false,),
             ],
           ),
         ),

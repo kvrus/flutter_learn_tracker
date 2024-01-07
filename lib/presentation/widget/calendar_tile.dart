@@ -4,12 +4,13 @@ import 'package:flutter_learn_tracker/presentation/theme/app_colors.dart';
 class CalendarTile extends StatelessWidget {
   final int date;
   final int completePercent;
+  final bool show;
 
-  const CalendarTile({
-    super.key,
-    required this.date,
-    required this.completePercent,
-  });
+  const CalendarTile(
+      {super.key,
+      required this.date,
+      required this.completePercent,
+      this.show = true});
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +28,19 @@ class CalendarTile extends StatelessWidget {
     } else {
       color = AppColors.green100;
     }
-    return Container(
-      width: 36,
-      height: 36,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Center(
-        child: Text('$date'),
-      ),
-    );
+    if (show) {
+      return Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Text('$date'),
+        ),
+      );
+    }
+    return const SizedBox(width: 36, height: 36);
   }
 }

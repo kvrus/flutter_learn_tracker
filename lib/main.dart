@@ -9,6 +9,7 @@ import 'package:flutter_learn_tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/data/task_repository.dart';
 import 'package:flutter_learn_tracker/domain/models/task_day.dart';
 import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
+import 'package:flutter_learn_tracker/presentation/widget/input_form_field.dart';
 import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
 import 'package:flutter_learn_tracker/presentation/widget/tasks_list_view.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -130,15 +131,47 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<TaskRepository>(context, listen: false)
-              .save(Task('New task', false));
-          _taskChangeNotifier.update(
-              Provider.of<TaskRepository>(context, listen: false).getAll());
-        },
+        onPressed: () => _dialogBuilder(context),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    final controller = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Create new task'),
+          content: InputFormField(controller: controller),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Add'),
+              onPressed: () {
+                Provider.of<TaskRepository>(context, listen: false)
+                    .save(Task(controller.text, false));
+                _taskChangeNotifier.update(
+                    Provider.of<TaskRepository>(context, listen: false).getAll());
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

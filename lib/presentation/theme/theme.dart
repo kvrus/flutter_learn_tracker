@@ -7,6 +7,7 @@ ThemeData theme() {
     useMaterial3: true,
     colorScheme: colorScheme(),
     textTheme: textTheme(),
+    inputDecorationTheme: inputDecorationTheme(),
   );
 }
 
@@ -28,4 +29,14 @@ ColorScheme colorScheme() {
 
 TextTheme textTheme() {
   return GoogleFonts.montserratTextTheme(const TextTheme());
+}
+
+InputDecorationTheme inputDecorationTheme() {
+  return const InputDecorationTheme(
+    hintStyle: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: AppColors.white60,
+    ),
+  );
 }

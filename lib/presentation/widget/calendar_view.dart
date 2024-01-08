@@ -90,12 +90,12 @@ class _MonthTitleRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(width: 36),
+        const SizedBox(width: 30),
         for (var item in List.generate(columnsCount, (index) => index))
           Padding(
             padding: const EdgeInsets.only(left: 8),
             child: Container(
-              width: 36,
+              width: 30,
               alignment: Alignment.center,
               child: item == prevInColumn
                   ? Text(previous)

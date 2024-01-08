@@ -30,8 +30,8 @@ class CalendarTile extends StatelessWidget {
     }
     if (show) {
       return Container(
-        width: 36,
-        height: 36,
+        width: 30,
+        height: 30,
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8),
@@ -41,6 +41,6 @@ class CalendarTile extends StatelessWidget {
         ),
       );
     }
-    return const SizedBox(width: 36, height: 36);
+    return const SizedBox(width: 30, height: 30);
   }
 }

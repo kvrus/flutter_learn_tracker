@@ -19,17 +19,20 @@ class TaskDataAdapter extends TypeAdapter<TaskData> {
     return TaskData(
       name: fields[0] as String,
       checked: fields[1] as bool,
+      updatedDate: fields[2] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskData obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.checked);
+      ..write(obj.checked)
+      ..writeByte(2)
+      ..write(obj.updatedDate);
   }
 
   @override

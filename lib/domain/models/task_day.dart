@@ -9,7 +9,8 @@ class TaskDay {
 class Task {
   final String name;
   final bool completed;
-  Task(this.name, this.completed);
+  final DateTime updatedDate;
+  Task(this.name, this.completed, this.updatedDate);
 }
 
 class DayProgress {

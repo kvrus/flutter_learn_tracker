@@ -11,12 +11,15 @@ class TaskData {
   @HiveField(1)
   bool checked;
 
-  TaskData({required this.name, required this.checked});
+  @HiveField(2)
+  DateTime updatedDate;
 
-  Task toDomain() => Task(name, checked);
+  TaskData({required this.name, required this.checked, required this.updatedDate});
+
+  Task toDomain() => Task(name, checked, updatedDate);
 }
 
 extension TaskX on Task {
-  TaskData fromDomain() => TaskData(name: name, checked: completed);
+  TaskData fromDomain() => TaskData(name: name, checked: completed, updatedDate: updatedDate);
 }
 

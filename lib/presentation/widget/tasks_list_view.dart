@@ -22,9 +22,9 @@ class TasksListView extends StatelessWidget {
           onDismissed(task.name);
         },
         child: TaskItem(
-            task: Task(task.name, task.completed),
+            task: Task(task.name, task.completed, task.updatedDate),
             onToggled: (checked) {
-              tasks[index] = Task(tasks[index].name, checked);
+              tasks[index] = Task(tasks[index].name, checked, DateTime.now());
               onChanged(tasks[index].name, checked, tasks.where((e) => e.completed).length, tasks.length);
             }),
       );

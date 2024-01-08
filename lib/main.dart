@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   tasks: _taskChangeNotifier.task,
                   onChanged: (name, toggled, checkedCount, allCount) {
                     Provider.of<TaskRepository>(context, listen: false)
-                        .save(Task(name, toggled));
+                        .save(Task(name, toggled, DateTime.now()));
                     Provider.of<ProgressRepository>(context, listen: false)
                         .save(DayProgress(
                             DateTime.now(), checkedCount, allCount));
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onDismissed: (String name) async {
                     final taskRepo = Provider.of<TaskRepository>(context, listen: false);
                     final progressRepo = Provider.of<ProgressRepository>(context, listen: false);
-                    await taskRepo.delete(Task(name, false));
+                    await taskRepo.delete(Task(name, false, DateTime.now()));
                     final tasks = taskRepo.getAll();
                     progressRepo.save(DayProgress(
                             DateTime.now(),
@@ -179,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   Provider.of<TaskRepository>(context, listen: false)
-                      .save(Task(_controller.text, false));
+                      .save(Task(_controller.text, false, DateTime.now()));
                   _taskChangeNotifier.update(
                       Provider.of<TaskRepository>(context, listen: false)
                           .getAll());

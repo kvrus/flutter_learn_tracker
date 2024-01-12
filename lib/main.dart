@@ -25,7 +25,27 @@ void main() async {
   Hive.registerAdapter(DayProgressDataAdapter());
   taskBox = await Hive.openBox('task_box');
   progressBox = await Hive.openBox('progress_box');
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      Provider<Box<TaskData>>.value(
+        value: taskBox!,
+      ),
+      Provider<Box<DayProgressData>>.value(
+        value: progressBox!,
+      ),
+      Provider<TaskRepository>(
+        create: (ctx) => TaskRepository(
+          Provider.of<Box<TaskData>>(ctx, listen: false),
+        ),
+      ),
+      Provider<ProgressRepository>(
+        create: (ctx) => ProgressRepository(
+          Provider.of<Box<DayProgressData>>(ctx, listen: false),
+        ),
+      )
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -33,31 +53,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<Box<TaskData>>.value(
-          value: taskBox!,
-        ),
-        Provider<Box<DayProgressData>>.value(
-          value: progressBox!,
-        ),
-        Provider<TaskRepository>(
-          create: (ctx) => TaskRepository(
-            Provider.of<Box<TaskData>>(ctx, listen: false),
-          ),
-        ),
-        Provider<ProgressRepository>(
-          create: (ctx) => ProgressRepository(
-            Provider.of<Box<DayProgressData>>(ctx, listen: false),
-          ),
-        )
-      ],
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Learn Tracker',
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        home: const HomePage(title: 'Learn Tracker'),
-      ),
+        home: HomePage(
+          title: 'Learn Tracker',
+          taskRepository: Provider.of<TaskRepository>(context, listen: false),
+          progressRepository:
+              Provider.of<ProgressRepository>(context, listen: false),
+        ),
     );
   }
 }

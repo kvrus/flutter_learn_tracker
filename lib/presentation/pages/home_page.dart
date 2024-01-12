@@ -9,35 +9,27 @@ import 'package:flutter_learn_tracker/presentation/widget/input_form_field.dart'
 import 'package:flutter_learn_tracker/presentation/widget/tasks_list_view.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   final _taskChangeNotifier = TaskChangeNotifier();
   final _progressChangeNotifier = ProgressChangeNotifier();
   final _formKey = GlobalKey<FormState>();
   final _controller = TextEditingController();
+  final TaskRepository taskRepository;
+  final ProgressRepository progressRepository;
+  final String title;
 
-  @override
-  void initState() {
+  HomePage({super.key, required this.title, required this.taskRepository, required this.progressRepository}) {
     _taskChangeNotifier
-        .update(Provider.of<TaskRepository>(context, listen: false).getAll());
+        .update(taskRepository.getAll());
     _progressChangeNotifier.update(
-        Provider.of<ProgressRepository>(context, listen: false).getAll());
-    super.initState();
+        progressRepository.getAll());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: SingleChildScrollView(
         child: Padding(

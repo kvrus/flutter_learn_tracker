@@ -68,7 +68,7 @@ class _CalendarRow extends StatelessWidget {
 
   int _findDayProgress(DateTime date, List<DayProgress> dayProgress) {
     final result = dayProgress.where((e) => e.date.format() == date.format());
-    if(result.isNotEmpty) {
+    if(result.isNotEmpty && result.first.allTasks > 0) {
       return ((result.first.completeTasks/result.first.allTasks)*100).ceil();
     } else {
       return 0;

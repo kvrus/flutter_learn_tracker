@@ -1,0 +1,36 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "task_tracker_title": "Task Tracker",
+
+  "create_new_task": "Create new task",
+  "hintEnterTaskName": "Enter your task name",
+  "errorEnterTaskName": "Please entre some text",
+
+  "buttonAdd": "Add",
+  "buttonCancel": "Cancel",
+
+  "monday" : "Mon",
+  "tuesday": "Tue",
+  "wednesday": "Wed",
+  "thursday": "Thu",
+  "friday": "Fri",
+  "saturday": "Sat",
+  "sunday": "Sun",
+
+  "january": "Jan",
+  "february": "Feb",
+  "march": "Mar",
+  "april": "Apr",
+  "may": "May",
+  "june": "Jun",
+  "july": "Jul",
+  "august": "Aug",
+  "september": "Sep",
+  "october": "Oct",
+  "november": "Nov",
+  "december": "Dec"
+}

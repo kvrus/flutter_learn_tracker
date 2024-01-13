@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/gen/assets.gen.dart';
+import 'package:flutter_learn_tracker/gen/assets.dart';
 import 'package:flutter_learn_tracker/packages/domain/models/CardData.dart';
 import 'package:flutter_learn_tracker/packages/widgets/image_card.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
@@ -15,9 +15,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cards = [
       CardData('Tasks Tracker', 'Отслеживайте свои задачи, достигайте целей',
-          Assets.images.trackerIcon.path),
+          Assets.assets_images_tracker_icon_jpg),
       CardData('Zelda Quiz', 'Играй в угадайку по любимой игре Zelda',
-          Assets.images.zeldaIcon.path)
+          Assets.assets_images_zelda_icon_jpg)
     ];
 
     return Scaffold(
@@ -34,7 +34,6 @@ class HomePage extends StatelessWidget {
                         if (index == 0) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => TrackerPage(
-                                  title: 'Tracker',
                                   taskRepository: Provider.of<TaskRepository>(
                                       context,
                                       listen: false),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/gen/assets.gen.dart';
+import 'package:flutter_learn_tracker/gen/assets.dart';
 import 'package:flutter_learn_tracker/packages/domain/models/CardData.dart';
 
 class ImageCard extends StatelessWidget {
@@ -32,7 +32,7 @@ class ImageCard extends StatelessWidget {
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12)),
                 child: FadeInImage(
-                  placeholder: AssetImage(Assets.images.beams.path),
+                  placeholder: const AssetImage(Assets.assets_images_beams_png),
                   image: AssetImage(cardData.imagePath),
                   // NetworkImage(cardData.imageUrl),
                   fit: BoxFit.fitWidth,

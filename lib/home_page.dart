@@ -24,8 +24,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Список приложений'),
         ),
-        body: Expanded(
-          child: Padding(
+        body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: ListView.builder(
                 itemCount: cards.length,
@@ -50,6 +49,6 @@ class HomePage extends StatelessWidget {
                       ),
                     )),
           ),
-        ));
+        );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/domain/extensions/calendar_ext.dart';
-import 'package:flutter_learn_tracker/domain/models/task_day.dart';
-import 'package:flutter_learn_tracker/presentation/widget/calendar_tile.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/extensions/calendar_ext.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/models/task_day.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/calendar_tile.dart';
 
 class CalendarView extends StatelessWidget {
   final DateTime currentDate;

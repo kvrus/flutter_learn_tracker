@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/domain/models/task_day.dart';
-import 'package:flutter_learn_tracker/presentation/widget/task_item.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/models/task_day.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/task_item.dart';
 
 class TasksListView extends StatelessWidget {
   final List<Task> tasks;

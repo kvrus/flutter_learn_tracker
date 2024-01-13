@@ -1,6 +1,6 @@
-import 'package:flutter_learn_tracker/data/models/progress_data.dart';
-import 'package:flutter_learn_tracker/domain/irepository/i_progress_repository.dart';
-import 'package:flutter_learn_tracker/domain/models/task_day.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/data/models/progress_data.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/models/task_day.dart';
 import 'package:hive/hive.dart';
 
 class ProgressRepository implements IProgressRepository {

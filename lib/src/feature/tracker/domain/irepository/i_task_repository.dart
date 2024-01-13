@@ -1,4 +1,4 @@
-import 'package:flutter_learn_tracker/domain/models/task_day.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/models/task_day.dart';
 
 abstract class ITaskRepository {
   List<Task> getAll();

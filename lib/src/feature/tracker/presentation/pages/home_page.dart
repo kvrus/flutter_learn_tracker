@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/data/notifiers/progress_change_notifier.dart';
-import 'package:flutter_learn_tracker/data/notifiers/tack_change_notifier.dart';
-import 'package:flutter_learn_tracker/data/progress_repository.dart';
-import 'package:flutter_learn_tracker/data/task_repository.dart';
-import 'package:flutter_learn_tracker/domain/models/task_day.dart';
-import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
-import 'package:flutter_learn_tracker/presentation/widget/input_form_field.dart';
-import 'package:flutter_learn_tracker/presentation/widget/tasks_list_view.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/data/notifiers/progress_change_notifier.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/data/notifiers/tack_change_notifier.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/data/task_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/models/task_day.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/calendar_view.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/input_form_field.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/tasks_list_view.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {

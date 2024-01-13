@@ -1,0 +1,36 @@
+{
+  "helloWorld": "Привет, Мир!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "task_tracker_title": "Трекер задач",
+
+  "create_new_task": "Создайте новую задачу",
+  "hintEnterTaskName": "Введите название задачи",
+  "errorEnterTaskName": "Поле не может быть пустым",
+
+  "buttonAdd": "Добавить",
+  "buttonCancel": "Отмена",
+
+  "monday" : "пн",
+  "tuesday": "вт",
+  "wednesday": "ср",
+  "thursday": "чт",
+  "friday": "пт",
+  "saturday": "сб",
+  "sunday": "вс",
+
+  "january": "янв.",
+  "february": "февр.",
+  "march": "март",
+  "april": "апр.",
+  "may": "май",
+  "june": "июнь",
+  "july": "июль",
+  "august": "авг.",
+  "september": "сент.",
+  "october": "окт.",
+  "november": "нояб.",
+  "december": "дек."
+}

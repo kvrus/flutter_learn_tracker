@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/data/notifiers/progress_change_notifier.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/data/notifiers/tack_change_notifier.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/data/task_repository.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/domain/models/task_day.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/calendar_view.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/input_form_field.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/tasks_list_view.dart';
+import 'package:flutter_learn_tracker/data/notifiers/progress_change_notifier.dart';
+import 'package:flutter_learn_tracker/data/notifiers/tack_change_notifier.dart';
+import 'package:flutter_learn_tracker/data/progress_repository.dart';
+import 'package:flutter_learn_tracker/data/task_repository.dart';
+import 'package:flutter_learn_tracker/domain/models/task_day.dart';
+import 'package:flutter_learn_tracker/l10n/localize_x.dart';
+import 'package:flutter_learn_tracker/presentation/widget/calendar_view.dart';
+import 'package:flutter_learn_tracker/presentation/widget/input_form_field.dart';
+import 'package:flutter_learn_tracker/presentation/widget/tasks_list_view.dart';
 import 'package:provider/provider.dart';
 
 class TrackerPage extends StatelessWidget {
@@ -16,20 +17,21 @@ class TrackerPage extends StatelessWidget {
   final _controller = TextEditingController();
   final TaskRepository taskRepository;
   final ProgressRepository progressRepository;
-  final String title;
 
-  TrackerPage({super.key, required this.title, required this.taskRepository, required this.progressRepository}) {
-    _taskChangeNotifier
-        .update(taskRepository.getAll());
-    _progressChangeNotifier.update(
-        progressRepository.getAll());
+  TrackerPage({
+    super.key,
+    required this.taskRepository,
+    required this.progressRepository,
+  }) {
+    _taskChangeNotifier.update(taskRepository.getAll());
+    _progressChangeNotifier.update(progressRepository.getAll());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(context.locale.task_tracker_title),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -55,22 +57,21 @@ class TrackerPage extends StatelessWidget {
                         .save(Task(name, toggled, DateTime.now()));
                     Provider.of<ProgressRepository>(context, listen: false)
                         .save(DayProgress(
-                        DateTime.now(), checkedCount, allCount));
+                            DateTime.now(), checkedCount, allCount));
                     _progressChangeNotifier.update(
                         Provider.of<ProgressRepository>(context, listen: false)
                             .getAll());
                   },
                   onDismissed: (String name) async {
-                    final taskRepo = Provider.of<TaskRepository>(context, listen: false);
-                    final progressRepo = Provider.of<ProgressRepository>(context, listen: false);
+                    final taskRepo =
+                        Provider.of<TaskRepository>(context, listen: false);
+                    final progressRepo =
+                        Provider.of<ProgressRepository>(context, listen: false);
                     await taskRepo.delete(Task(name, false, DateTime.now()));
                     final tasks = taskRepo.getAll();
-                    progressRepo.save(DayProgress(
-                        DateTime.now(),
-                        tasks.where((e) => e.completed).length,
-                        tasks.length));
-                    _progressChangeNotifier.update(
-                        progressRepo.getAll());
+                    progressRepo.save(DayProgress(DateTime.now(),
+                        tasks.where((e) => e.completed).length, tasks.length));
+                    _progressChangeNotifier.update(progressRepo.getAll());
                     _taskChangeNotifier.update(taskRepo.getAll());
                   },
                 ),
@@ -81,7 +82,7 @@ class TrackerPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _dialogBuilder(context),
-        tooltip: 'Increment',
+        tooltip: context.locale.buttonAdd,
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
@@ -92,14 +93,14 @@ class TrackerPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Create new task'),
+          title: Text(context.locale.create_new_task),
           content: InputFormField(formKey: _formKey, controller: _controller),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Cancel'),
+              child: Text(context.locale.buttonCancel),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -108,7 +109,7 @@ class TrackerPage extends StatelessWidget {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Add'),
+              child: Text(context.locale.buttonAdd),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   Provider.of<TaskRepository>(context, listen: false)

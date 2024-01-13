@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_tracker/home_page.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/progress_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/home_page.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/tracker_page.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/theme/theme.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/task_repository.dart';
@@ -57,12 +58,7 @@ class MyApp extends StatelessWidget {
         title: 'Learn Tracker',
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        home: HomePage(
-          title: 'Learn Tracker',
-          taskRepository: Provider.of<TaskRepository>(context, listen: false),
-          progressRepository:
-              Provider.of<ProgressRepository>(context, listen: false),
-        ),
+        home: const HomePage(),
     );
   }
 }

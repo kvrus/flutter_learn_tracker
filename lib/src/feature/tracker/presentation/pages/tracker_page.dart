@@ -9,7 +9,7 @@ import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/in
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/tasks_list_view.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class TrackerPage extends StatelessWidget {
   final _taskChangeNotifier = TaskChangeNotifier();
   final _progressChangeNotifier = ProgressChangeNotifier();
   final _formKey = GlobalKey<FormState>();
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
   final ProgressRepository progressRepository;
   final String title;
 
-  HomePage({super.key, required this.title, required this.taskRepository, required this.progressRepository}) {
+  TrackerPage({super.key, required this.title, required this.taskRepository, required this.progressRepository}) {
     _taskChangeNotifier
         .update(taskRepository.getAll());
     _progressChangeNotifier.update(

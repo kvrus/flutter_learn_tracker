@@ -15,7 +15,7 @@ class ProgressRepository implements IProgressRepository {
 
   @override
   List<DayProgress> getAll() {
-    return box.values.toList().toList().map((item) => item.toDomain()).toList();
+    return box.values.toList().map((item) => item.toDomain()).toList();
   }
 
   @override

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/gen/assets.dart';
 import 'package:flutter_learn_tracker/packages/domain/models/CardData.dart';
 import 'package:flutter_learn_tracker/packages/widgets/image_card.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/data/task_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_task_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/tracker_page.dart';
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/zelda_quiz_page.dart';
 import 'package:provider/provider.dart';
@@ -33,11 +33,11 @@ class HomePage extends StatelessWidget {
                         if (index == 0) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => TrackerPage(
-                                  taskRepository: Provider.of<TaskRepository>(
+                                  taskRepository: Provider.of<ITaskRepository>(
                                       context,
                                       listen: false),
                                   progressRepository:
-                                      Provider.of<ProgressRepository>(context,
+                                      Provider.of<IProgressRepository>(context,
                                           listen: false))));
                         } else if (index == 1) {
                           Navigator.of(context).push(MaterialPageRoute(

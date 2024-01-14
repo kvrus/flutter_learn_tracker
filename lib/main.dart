@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/home_page.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/progress_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
+import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_task_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/theme/theme.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/task_repository.dart';
@@ -36,12 +38,12 @@ void main() async {
       Provider<Box<DayProgressData>>.value(
         value: progressBox!,
       ),
-      Provider<TaskRepository>(
+      Provider<ITaskRepository>(
         create: (ctx) => TaskRepository(
           Provider.of<Box<TaskData>>(ctx, listen: false),
         ),
       ),
-      Provider<ProgressRepository>(
+      Provider<IProgressRepository>(
         create: (ctx) => ProgressRepository(
           Provider.of<Box<DayProgressData>>(ctx, listen: false),
         ),

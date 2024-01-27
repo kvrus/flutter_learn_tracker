@@ -81,6 +81,7 @@ class TrackerPage extends StatelessWidget {
   }
 
   Future<void> _dialogBuilder(BuildContext context) {
+    _controller.text = "Some text";
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {

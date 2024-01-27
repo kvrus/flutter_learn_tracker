@@ -9,6 +9,8 @@ import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/tra
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/zelda_quiz_page.dart';
 import 'package:provider/provider.dart';
 
+import 'di.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -36,12 +38,9 @@ class HomePage extends StatelessWidget {
                         if (index == 0) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => TrackerPage(
-                                  taskRepository: Provider.of<ITaskRepository>(
-                                      context,
-                                      listen: false),
+                                  taskRepository: getIt<ITaskRepository>(),
                                   progressRepository:
-                                      Provider.of<IProgressRepository>(context,
-                                          listen: false))));
+                                      getIt<IProgressRepository>())));
                         } else if (index == 1) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => const ZeldaQuizPage()));

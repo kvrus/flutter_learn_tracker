@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/gen/assets.dart';
 import 'package:flutter_learn_tracker/packages/domain/models/CardData.dart';
 import 'package:flutter_learn_tracker/packages/widgets/image_card.dart';
+import 'package:flutter_learn_tracker/src/feature/fortune/presentation/fortune_page.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_task_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/tracker_page.dart';
@@ -17,7 +18,9 @@ class HomePage extends StatelessWidget {
       CardData('Tasks Tracker', 'Отслеживайте свои задачи, достигайте целей',
           Assets.assets_images_tracker_icon_jpg),
       CardData('Zelda Quiz', 'Играй в угадайку по любимой игре Zelda',
-          Assets.assets_images_zelda_icon_jpg)
+          Assets.assets_images_zelda_icon_jpg),
+      CardData('Fortune wheel', 'Не можете выбрать? Крутите барабан',
+          Assets.assets_images_sortune_jpeg)
     ];
 
     return Scaffold(
@@ -42,6 +45,9 @@ class HomePage extends StatelessWidget {
                         } else if (index == 1) {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => const ZeldaQuizPage()));
+                        } else if (index == 2) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => const FortunePage()));
                         }
                       },
                       child: ImageCard(

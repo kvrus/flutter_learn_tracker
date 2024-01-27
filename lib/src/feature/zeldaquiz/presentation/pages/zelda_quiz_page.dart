@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_learn_tracker/src/feature/zeldaquiz/data/api/zelda_rest_client.dart';
+import 'package:flutter_learn_tracker/di.dart';
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/domain/%20model/zelda_entity.dart';
-import 'package:flutter_learn_tracker/src/feature/zeldaquiz/domain/quiz_service.dart';
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/zelda_quiz_bloc.dart';
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/zelda_quiz_state.dart';
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/widgets/answer_tile.dart';
@@ -13,8 +11,6 @@ class ZeldaQuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ZeldaRestClient client =
-        ZeldaRestClient(Dio(), baseUrl: 'https://zelda.fanapis.com/api');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Zelda Quiz'),
@@ -22,8 +18,7 @@ class ZeldaQuizPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: BlocProvider<ZeldaQuizCubit>(
-          create: (ctx) =>
-              ZeldaQuizCubit(service: QuizService(client))..onStart(),
+          create: (ctx) => getIt<ZeldaQuizCubit>()..onStart(),
           child: BlocBuilder<ZeldaQuizCubit, ZeldaQuizState>(
             builder: (context, state) {
               return state.question != null
@@ -84,7 +79,6 @@ class ZeldaQuizPage extends StatelessWidget {
         ),
       ),
     );
-    // https://static.wikia.nocookie.net/zelda_gamepedia_en/images/5/53/BotW_Bokoblin_Artwork.png/revision/latest?cb=20170423121959
   }
 
   void _checkAnswer(

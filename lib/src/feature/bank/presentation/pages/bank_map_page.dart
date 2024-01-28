@@ -9,6 +9,5 @@
  * тоже что и на списке +
  * "schedule": "ежедневно с 9:00 до 21:00",
  * "branchStatus": {"branchStatusText": "Свободно","branchStatusClass": "free"},
- * "partnerName": null Если есть
  * "metro": [{"line": "red-line-dotted","name": "Коптево"}],
  * */

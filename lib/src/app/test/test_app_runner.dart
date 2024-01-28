@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_learn_tracker/di.dart';
 import 'package:flutter_learn_tracker/src/app/core/app_runner.dart';
+import 'package:flutter_learn_tracker/src/app/test/test_app_config.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/progress_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/task_data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,6 +19,6 @@ class TestAppRunner extends AppRunner {
     }
     Hive.registerAdapter(TaskDataAdapter());
     Hive.registerAdapter(DayProgressDataAdapter());
-    await setupDI();
+    await setupDI(TestAppConfig());
   }
 }

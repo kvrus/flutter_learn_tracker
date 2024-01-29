@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learn_tracker/di.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/z
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/zelda_quiz_state.dart';
 import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/widgets/answer_tile.dart';
 
+@RoutePage()
 class ZeldaQuizPage extends StatelessWidget {
   const ZeldaQuizPage({super.key});
 

@@ -1,16 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/gen/assets.dart';
 import 'package:flutter_learn_tracker/packages/domain/models/CardData.dart';
 import 'package:flutter_learn_tracker/packages/widgets/image_card.dart';
-import 'package:flutter_learn_tracker/src/feature/fortune/presentation/fortune_page.dart';
+import 'package:flutter_learn_tracker/router.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_task_repository.dart';
-import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/tracker_page.dart';
-import 'package:flutter_learn_tracker/src/feature/zeldaquiz/presentation/pages/zelda_quiz_page.dart';
-import 'package:provider/provider.dart';
 
 import 'di.dart';
 
+@RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -26,34 +25,31 @@ class HomePage extends StatelessWidget {
     ];
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Список приложений'),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: ListView.builder(
-                itemCount: cards.length,
-                itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        if (index == 0) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => TrackerPage(
-                                  taskRepository: getIt<ITaskRepository>(),
-                                  progressRepository:
-                                      getIt<IProgressRepository>())));
-                        } else if (index == 1) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => const ZeldaQuizPage()));
-                        } else if (index == 2) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => const FortunePage()));
-                        }
-                      },
-                      child: ImageCard(
-                        cardData: cards[index],
-                      ),
-                    )),
-          ),
-        );
+      appBar: AppBar(
+        title: const Text('Список приложений'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: ListView.builder(
+            itemCount: cards.length,
+            itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    if (index == 0) {
+                      context.router.push(TrackerRoute(
+                        taskRepository: getIt<ITaskRepository>(),
+                        progressRepository: getIt<IProgressRepository>(),
+                      ));
+                    } else if (index == 1) {
+                      context.router.push(const ZeldaQuizRoute());
+                    } else if (index == 2) {
+                      context.router.push(const FortuneRoute());
+                    }
+                  },
+                  child: ImageCard(
+                    cardData: cards[index],
+                  ),
+                )),
+      ),
+    );
   }
 }

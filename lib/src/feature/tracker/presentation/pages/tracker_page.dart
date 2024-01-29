@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/notifiers/progress_change_notifier.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/notifiers/tack_change_notifier.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/ca
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/input_form_field.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/widget/tasks_list_view.dart';
 
+@RoutePage()
 class TrackerPage extends StatelessWidget {
   final _taskChangeNotifier = TaskChangeNotifier();
   final _progressChangeNotifier = ProgressChangeNotifier();

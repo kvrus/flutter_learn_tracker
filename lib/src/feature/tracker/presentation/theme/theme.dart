@@ -8,6 +8,7 @@ ThemeData theme() {
     colorScheme: colorScheme(),
     textTheme: textTheme(),
     inputDecorationTheme: inputDecorationTheme(),
+    bottomNavigationBarTheme: bottomNavigationBarTheme(),
   );
 }
 
@@ -38,5 +39,12 @@ InputDecorationTheme inputDecorationTheme() {
       fontWeight: FontWeight.w500,
       color: AppColors.white60,
     ),
+  );
+}
+
+BottomNavigationBarThemeData bottomNavigationBarTheme() {
+  return const BottomNavigationBarThemeData(
+    selectedItemColor: AppColors.green100,
+    unselectedItemColor: AppColors.white60,
   );
 }

@@ -15,6 +15,30 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BankATMRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BankATMPage(),
+      );
+    },
+    BankBranchRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BankBranchPage(),
+      );
+    },
+    BankCashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BankCashPage(),
+      );
+    },
+    BankHomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BankHomePage(),
+      );
+    },
     FortuneRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -45,6 +69,62 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [BankATMPage]
+class BankATMRoute extends PageRouteInfo<void> {
+  const BankATMRoute({List<PageRouteInfo>? children})
+      : super(
+          BankATMRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BankATMRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BankBranchPage]
+class BankBranchRoute extends PageRouteInfo<void> {
+  const BankBranchRoute({List<PageRouteInfo>? children})
+      : super(
+          BankBranchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BankBranchRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BankCashPage]
+class BankCashRoute extends PageRouteInfo<void> {
+  const BankCashRoute({List<PageRouteInfo>? children})
+      : super(
+          BankCashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BankCashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BankHomePage]
+class BankHomeRoute extends PageRouteInfo<void> {
+  const BankHomeRoute({List<PageRouteInfo>? children})
+      : super(
+          BankHomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BankHomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

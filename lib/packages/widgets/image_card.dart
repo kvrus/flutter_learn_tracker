@@ -24,37 +24,35 @@ class ImageCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Expanded(
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12)),
-                child: FadeInImage(
-                  placeholder: const AssetImage(Assets.assets_images_beams_png),
-                  image: AssetImage(cardData.imagePath),
-                  // NetworkImage(cardData.imageUrl),
-                  fit: BoxFit.fitWidth,
-                  width: double.infinity,
-                  height: 160,
-                ),
-              ),
-              Container(
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  topRight: Radius.circular(12)),
+              child: FadeInImage(
+                placeholder: const AssetImage(Assets.assets_images_beams_png),
+                image: AssetImage(cardData.imagePath),
+                // NetworkImage(cardData.imageUrl),
+                fit: BoxFit.fitWidth,
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(12),
-                        bottomLeft: Radius.circular(12))),
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Text(cardData.title), Text(cardData.subTitle)],
-                ),
-              )
-            ],
-          ),
+                height: 160,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(12))),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [Text(cardData.title), Text(cardData.subTitle)],
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn_tracker/gen/assets.dart';
 import 'package:flutter_learn_tracker/packages/domain/models/CardData.dart';
 import 'package:flutter_learn_tracker/packages/widgets/image_card.dart';
-import 'package:flutter_learn_tracker/router.dart';
+import 'package:flutter_learn_tracker/src/router/router.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_task_repository.dart';
 
@@ -21,7 +21,9 @@ class HomePage extends StatelessWidget {
       CardData('Zelda Quiz', 'Играй в угадайку по любимой игре Zelda',
           Assets.assets_images_zelda_icon_jpg),
       CardData('Fortune wheel', 'Не можете выбрать? Крутите барабан',
-          Assets.assets_images_sortune_jpeg)
+          Assets.assets_images_fortune_jpeg),
+      CardData('Your bank', 'Отделения, банкоматы, пункты обмена валют',
+          Assets.assets_images_bank_png)
     ];
 
     return Scaffold(
@@ -43,6 +45,8 @@ class HomePage extends StatelessWidget {
                       context.router.push(const ZeldaQuizRoute());
                     } else if (index == 2) {
                       context.router.push(const FortuneRoute());
+                    } else if (index == 3) {
+                      context.router.push(const BankHomeRoute());
                     }
                   },
                   child: ImageCard(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_tracker/router.dart';
+import 'package:flutter_learn_tracker/src/router/router.dart';
 import 'package:flutter_learn_tracker/src/app/core/app_builder.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/theme/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

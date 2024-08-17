@@ -6,6 +6,8 @@ import 'package:flutter_learn_tracker/src/feature/bank/presentation/pages/bank_b
 import 'package:flutter_learn_tracker/src/feature/bank/presentation/pages/bank_cash_page.dart';
 import 'package:flutter_learn_tracker/src/feature/bank/presentation/pages/bank_home_page.dart';
 import 'package:flutter_learn_tracker/src/feature/fortune/presentation/fortune_page.dart';
+import 'package:flutter_learn_tracker/src/feature/login/presentation/pages/login_page.dart';
+import 'package:flutter_learn_tracker/src/feature/index/pages/index_page.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_progress_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/domain/irepository/i_task_repository.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/pages/tracker_page.dart';
@@ -17,6 +19,7 @@ part 'router.gr.dart';
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(page: LoginRoute.page),
         AutoRoute(page: HomeRoute.page, initial: true),
         AutoRoute(page: TrackerRoute.page),
         AutoRoute(page: ZeldaQuizRoute.page),

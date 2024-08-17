@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'zelda_entity.dart';
 
@@ -12,7 +12,7 @@ part of 'zelda_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ZeldaEntitiesResult _$ZeldaEntitiesResultFromJson(Map<String, dynamic> json) {
   return _ZeldaEntitiesResult.fromJson(json);
@@ -68,22 +68,22 @@ class _$ZeldaEntitiesResultCopyWithImpl<$Res, $Val extends ZeldaEntitiesResult>
 }
 
 /// @nodoc
-abstract class _$$_ZeldaEntitiesResultCopyWith<$Res>
+abstract class _$$ZeldaEntitiesResultImplCopyWith<$Res>
     implements $ZeldaEntitiesResultCopyWith<$Res> {
-  factory _$$_ZeldaEntitiesResultCopyWith(_$_ZeldaEntitiesResult value,
-          $Res Function(_$_ZeldaEntitiesResult) then) =
-      __$$_ZeldaEntitiesResultCopyWithImpl<$Res>;
+  factory _$$ZeldaEntitiesResultImplCopyWith(_$ZeldaEntitiesResultImpl value,
+          $Res Function(_$ZeldaEntitiesResultImpl) then) =
+      __$$ZeldaEntitiesResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? count, List<ZeldaEntity>? data});
 }
 
 /// @nodoc
-class __$$_ZeldaEntitiesResultCopyWithImpl<$Res>
-    extends _$ZeldaEntitiesResultCopyWithImpl<$Res, _$_ZeldaEntitiesResult>
-    implements _$$_ZeldaEntitiesResultCopyWith<$Res> {
-  __$$_ZeldaEntitiesResultCopyWithImpl(_$_ZeldaEntitiesResult _value,
-      $Res Function(_$_ZeldaEntitiesResult) _then)
+class __$$ZeldaEntitiesResultImplCopyWithImpl<$Res>
+    extends _$ZeldaEntitiesResultCopyWithImpl<$Res, _$ZeldaEntitiesResultImpl>
+    implements _$$ZeldaEntitiesResultImplCopyWith<$Res> {
+  __$$ZeldaEntitiesResultImplCopyWithImpl(_$ZeldaEntitiesResultImpl _value,
+      $Res Function(_$ZeldaEntitiesResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_ZeldaEntitiesResultCopyWithImpl<$Res>
     Object? count = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$_ZeldaEntitiesResult(
+    return _then(_$ZeldaEntitiesResultImpl(
       count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -107,13 +107,13 @@ class __$$_ZeldaEntitiesResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ZeldaEntitiesResult implements _ZeldaEntitiesResult {
-  const _$_ZeldaEntitiesResult(
+class _$ZeldaEntitiesResultImpl implements _ZeldaEntitiesResult {
+  const _$ZeldaEntitiesResultImpl(
       {required this.count, required final List<ZeldaEntity>? data})
       : _data = data;
 
-  factory _$_ZeldaEntitiesResult.fromJson(Map<String, dynamic> json) =>
-      _$$_ZeldaEntitiesResultFromJson(json);
+  factory _$ZeldaEntitiesResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ZeldaEntitiesResultImplFromJson(json);
 
   @override
   final int? count;
@@ -122,6 +122,7 @@ class _$_ZeldaEntitiesResult implements _ZeldaEntitiesResult {
   List<ZeldaEntity>? get data {
     final value = _data;
     if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -132,10 +133,10 @@ class _$_ZeldaEntitiesResult implements _ZeldaEntitiesResult {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ZeldaEntitiesResult &&
+            other is _$ZeldaEntitiesResultImpl &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
@@ -148,13 +149,13 @@ class _$_ZeldaEntitiesResult implements _ZeldaEntitiesResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ZeldaEntitiesResultCopyWith<_$_ZeldaEntitiesResult> get copyWith =>
-      __$$_ZeldaEntitiesResultCopyWithImpl<_$_ZeldaEntitiesResult>(
+  _$$ZeldaEntitiesResultImplCopyWith<_$ZeldaEntitiesResultImpl> get copyWith =>
+      __$$ZeldaEntitiesResultImplCopyWithImpl<_$ZeldaEntitiesResultImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ZeldaEntitiesResultToJson(
+    return _$$ZeldaEntitiesResultImplToJson(
       this,
     );
   }
@@ -163,10 +164,10 @@ class _$_ZeldaEntitiesResult implements _ZeldaEntitiesResult {
 abstract class _ZeldaEntitiesResult implements ZeldaEntitiesResult {
   const factory _ZeldaEntitiesResult(
       {required final int? count,
-      required final List<ZeldaEntity>? data}) = _$_ZeldaEntitiesResult;
+      required final List<ZeldaEntity>? data}) = _$ZeldaEntitiesResultImpl;
 
   factory _ZeldaEntitiesResult.fromJson(Map<String, dynamic> json) =
-      _$_ZeldaEntitiesResult.fromJson;
+      _$ZeldaEntitiesResultImpl.fromJson;
 
   @override
   int? get count;
@@ -174,7 +175,7 @@ abstract class _ZeldaEntitiesResult implements ZeldaEntitiesResult {
   List<ZeldaEntity>? get data;
   @override
   @JsonKey(ignore: true)
-  _$$_ZeldaEntitiesResultCopyWith<_$_ZeldaEntitiesResult> get copyWith =>
+  _$$ZeldaEntitiesResultImplCopyWith<_$ZeldaEntitiesResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -232,22 +233,22 @@ class _$ZeldaEntityCopyWithImpl<$Res, $Val extends ZeldaEntity>
 }
 
 /// @nodoc
-abstract class _$$_ZeldaEntityCopyWith<$Res>
+abstract class _$$ZeldaEntityImplCopyWith<$Res>
     implements $ZeldaEntityCopyWith<$Res> {
-  factory _$$_ZeldaEntityCopyWith(
-          _$_ZeldaEntity value, $Res Function(_$_ZeldaEntity) then) =
-      __$$_ZeldaEntityCopyWithImpl<$Res>;
+  factory _$$ZeldaEntityImplCopyWith(
+          _$ZeldaEntityImpl value, $Res Function(_$ZeldaEntityImpl) then) =
+      __$$ZeldaEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? name, String? description});
 }
 
 /// @nodoc
-class __$$_ZeldaEntityCopyWithImpl<$Res>
-    extends _$ZeldaEntityCopyWithImpl<$Res, _$_ZeldaEntity>
-    implements _$$_ZeldaEntityCopyWith<$Res> {
-  __$$_ZeldaEntityCopyWithImpl(
-      _$_ZeldaEntity _value, $Res Function(_$_ZeldaEntity) _then)
+class __$$ZeldaEntityImplCopyWithImpl<$Res>
+    extends _$ZeldaEntityCopyWithImpl<$Res, _$ZeldaEntityImpl>
+    implements _$$ZeldaEntityImplCopyWith<$Res> {
+  __$$ZeldaEntityImplCopyWithImpl(
+      _$ZeldaEntityImpl _value, $Res Function(_$ZeldaEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -256,7 +257,7 @@ class __$$_ZeldaEntityCopyWithImpl<$Res>
     Object? name = freezed,
     Object? description = freezed,
   }) {
-    return _then(_$_ZeldaEntity(
+    return _then(_$ZeldaEntityImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -271,11 +272,11 @@ class __$$_ZeldaEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ZeldaEntity implements _ZeldaEntity {
-  const _$_ZeldaEntity({required this.name, required this.description});
+class _$ZeldaEntityImpl implements _ZeldaEntity {
+  const _$ZeldaEntityImpl({required this.name, required this.description});
 
-  factory _$_ZeldaEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_ZeldaEntityFromJson(json);
+  factory _$ZeldaEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ZeldaEntityImplFromJson(json);
 
   @override
   final String? name;
@@ -288,10 +289,10 @@ class _$_ZeldaEntity implements _ZeldaEntity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ZeldaEntity &&
+            other is _$ZeldaEntityImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -304,12 +305,12 @@ class _$_ZeldaEntity implements _ZeldaEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ZeldaEntityCopyWith<_$_ZeldaEntity> get copyWith =>
-      __$$_ZeldaEntityCopyWithImpl<_$_ZeldaEntity>(this, _$identity);
+  _$$ZeldaEntityImplCopyWith<_$ZeldaEntityImpl> get copyWith =>
+      __$$ZeldaEntityImplCopyWithImpl<_$ZeldaEntityImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ZeldaEntityToJson(
+    return _$$ZeldaEntityImplToJson(
       this,
     );
   }
@@ -318,10 +319,10 @@ class _$_ZeldaEntity implements _ZeldaEntity {
 abstract class _ZeldaEntity implements ZeldaEntity {
   const factory _ZeldaEntity(
       {required final String? name,
-      required final String? description}) = _$_ZeldaEntity;
+      required final String? description}) = _$ZeldaEntityImpl;
 
   factory _ZeldaEntity.fromJson(Map<String, dynamic> json) =
-      _$_ZeldaEntity.fromJson;
+      _$ZeldaEntityImpl.fromJson;
 
   @override
   String? get name;
@@ -329,6 +330,6 @@ abstract class _ZeldaEntity implements ZeldaEntity {
   String? get description;
   @override
   @JsonKey(ignore: true)
-  _$$_ZeldaEntityCopyWith<_$_ZeldaEntity> get copyWith =>
+  _$$ZeldaEntityImplCopyWith<_$ZeldaEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

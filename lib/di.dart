@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_learn_tracker/src/app/core/app_config.dart';
+import 'package:flutter_learn_tracker/src/feature/login/domain/LoginService.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/progress_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/models/task_data.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/data/progress_repository.dart';
@@ -33,5 +34,6 @@ Future<void> setupDI(IConfig config) async {
 
   getIt.registerLazySingleton<ZeldaRestClient>(() => ZeldaRestClient(Dio(), baseUrl: config.getBaseUrl()));
   getIt.registerLazySingleton<IQuizService>(() => QuizService(getIt<ZeldaRestClient>()));
+  getIt.registerLazySingleton<ILoginService>(() => LoginService());
   getIt.registerFactory(() => ZeldaQuizCubit(service: getIt<IQuizService>()));
 }

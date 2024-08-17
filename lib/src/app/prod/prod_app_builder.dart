@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_tracker/di.dart';
+import 'package:flutter_learn_tracker/src/feature/login/domain/LoginService.dart';
 import 'package:flutter_learn_tracker/src/router/router.dart';
 import 'package:flutter_learn_tracker/src/app/core/app_builder.dart';
 import 'package:flutter_learn_tracker/src/feature/tracker/presentation/theme/theme.dart';
@@ -14,6 +17,15 @@ class ProdAppBuilder extends AppBuilder {
   Widget build() {
     Intl.defaultLocale = 'ru';
     return MaterialApp.router(
+      routerDelegate: AutoRouterDelegate.declarative(
+        _appRouter,
+        routes: (_) => [
+          if (getIt<ILoginService>().isUserAuthorized())
+            const HomeRoute()
+          else
+            LoginRoute(),
+        ],
+      ),
       title: 'Task Tracker',
       debugShowCheckedModeBanner: false,
       theme: theme(),
@@ -28,7 +40,7 @@ class ProdAppBuilder extends AppBuilder {
         Locale('ru'),
       ],
       //locale: const Locale('ru', 'RU'),
-      routerConfig: _appRouter.config(),
+      //routerConfig: _appRouter.config(),
     );
   }
 }

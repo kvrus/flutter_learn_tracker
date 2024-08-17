@@ -51,6 +51,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    IndexRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const IndexPage(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LoginPage(key: args.key),
+      );
+    },
     TrackerRoute.name: (routeData) {
       final args = routeData.argsAs<TrackerRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -153,6 +167,48 @@ class HomeRoute extends PageRouteInfo<void> {
   static const String name = 'HomeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [IndexPage]
+class IndexRoute extends PageRouteInfo<void> {
+  const IndexRoute({List<PageRouteInfo>? children})
+      : super(
+          IndexRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'IndexRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LoginPage]
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          LoginRoute.name,
+          args: LoginRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const PageInfo<LoginRouteArgs> page = PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
